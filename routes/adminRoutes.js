@@ -2,7 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product.js"); 
-const upload = require('../middlewares/uploadCloudinaryMiddleware.js');
+const uploadMiddleware  = require('../middlewares/uploadCloudinaryMiddleware.js');
+const upload = uploadMiddleware("imgs");
 
 const { createProduct, createProductForm, adminShowProducts, adminEditProduct, adminDeleteProduct } = require("../controllers/productController.js");
 
@@ -77,10 +78,30 @@ router.put("/edit/:id", async (req, res) => {
 router.get("/new", (req, res) => {
     res.status(200).send(createProductForm());
 });
+/*
+   "name": "Camiseta de Luffy 3",
+    "description": "Camiseta con el personaje de Luffy de la serie de One Piece",
+    "image": "To Be Added",
+    "category": "Camisetas",
+    "size": "L",
+    "price": 1
 
-router.post("/create",async(req, res) => {
+*/
+router.post("/create", upload.single("image") , async (req, res) => {
+    console.log("Received request", req.body);
+    console.log("Received file:", req.file);
     try {
-        const product = await Product.create(req.body);
+        //console.log("Received product data:", req.body);
+        const _product = {
+            name: req.body.name,
+            description: req.body.description,
+            image: req.file.path,
+            category: req.body.category,
+            size: req.body.size,
+            price: req.body.price
+        }
+
+        const product = await Product.create(_product);
         res.status(201).send(createProduct(product));
     } catch (error) {
         console.error(error);

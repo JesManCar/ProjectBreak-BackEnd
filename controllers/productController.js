@@ -6,13 +6,13 @@ const { validSizes, validCategories } = require('../models/Product.js');
 function createProductForm() {
     console.log("Creating product form");
     let  form = `<h1>Create Product</h1>
-        <form action="/admin/create" method="POST">
+        <form action="/admin/create" method="POST" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" required>
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" name="image" required>
+            <label for="image">Imagen:</label>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" required>
             <label for="category">Category:</label>
             <select id="category" name="category" required>`
     form += validCategories.map(cat => `<option value="${cat}">${cat}</option>`).join('');

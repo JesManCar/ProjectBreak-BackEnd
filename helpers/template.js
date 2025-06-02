@@ -52,7 +52,6 @@ const head = `<!DOCTYPE html>
         </style>
     </head>
 `
-
 const header = `
 <body>
     <header>
@@ -76,8 +75,9 @@ const adminHeader = `<body>
             <li><a href="/admin/products/Pantalones">Pantalones</a></li>
             <li><a href="/admin/products/Zapatos">Zapatos</a></li>
             <li><a href="/admin/products/Accesorios">Accesorios</a></li>
-            <li><h3 style="color:red">ADMINISTRADOR</h3></li>
-            <li><a href="/login/out">LogOut</a></li>
+            <li><a href="/admin/new">Nuevo Producto</a></li>
+            <li><a href="/login/out" style="color:red">LogOut</a></li>
+            <li><h3 style="color:red">ADMIN</h3></li>
         </nav>
         </header>
 `

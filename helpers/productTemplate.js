@@ -1,13 +1,15 @@
 const { validSizes, validCategories } = require('../models/Product.js');
+const { calculateImageUrl } = require('../helpers/calculateImageUrl.js');
 
-function productTemplate (product){ 
+
+function productTemplate (product){     
     return `<div class="product">
         <h2>${product.name}</h2>
         <p>${product.description}</p>
         <p>Category: ${product.category}</p>
         <p>Size: ${product.size}</p>
         <p>Price: ${product.price}€</p>
-        <img src="${product.image}" alt="${product.description}" />
+        <img src="${calculateImageUrl(product.image)}" alt="${product.description}" />
     </div>
 `};
 
@@ -18,7 +20,7 @@ function adminProductTemplate (product){
         <p>Category: ${product.category}</p>
         <p>Size: ${product.size}</p>
         <p>Price: ${product.price}€</p>
-        <img src="${product.image}" alt="${product.description}" />
+        <img src="${calculateImageUrl(product.image)}" alt="${product.description}" />
         <a href="/admin/product/${product._id}">View</a>
         <a href="/admin/product/edit/${product._id}">Edit</a>
         <a href="/admin/delete/${product._id}">Delete</a>

@@ -29,7 +29,7 @@ app.use('/login', authRoutes);
 
 // Admin Routes
 app.use(methodOverride('_method'))
-app.use('/admin',authMiddleware, adminRoutes);
+app.use('/admin',/*authMiddleware,*/ adminRoutes);
 
 dbConnection();
 
