@@ -21,9 +21,11 @@ function adminProductTemplate (product){
         <p>Size: ${product.size}</p>
         <p>Price: ${product.price}€</p>
         <img src="${calculateImageUrl(product.image)}" alt="${product.description}" />
+        <div class="product-actions">
         <a href="/admin/product/${product._id}">View</a>
         <a href="/admin/product/edit/${product._id}">Edit</a>
         <a href="/admin/delete/${product._id}">Delete</a>
+        </div>
     </div>
 `}
 

@@ -22,11 +22,64 @@ const head = `<!DOCTYPE html>
                 text-align: center;
                 color: #333;
             }
+            .product-list {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: center;
+                padding: 20px;
+            }   
             .product {
-                border: 1px solid red;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: rgb(219, 219, 219);
+                border: 1px solid black;
                 margin: 20px;
+                padding: 10px;
                 border-radius: 5px;
                 width: 20%;
+            }
+            .product-actions{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .product-actions a {
+                text-decoration: none;
+                color: white;
+                padding: 5px 10px;
+                border: 1px solid #333;
+                background-color:rgb(146, 146, 146);
+                border-radius: 5px;
+            }
+            .product-actions a:hover {
+                background-color: #333;
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: rgb(219, 219, 219);
+                border: 1px solid black;
+                margin: 20px auto;
+                padding: 20px;
+                border-radius: 5px;
+                width: 50%;
+                gap: 10px;
+            }
+            form button[type="submit"] {
+                background-color: #333;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            form button[type="submit"]:hover {
+                background-color: #555;
             }
             nav ul{
                 background-color: #333;

@@ -10,7 +10,7 @@ function createProductForm() {
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="description">Description:</label>
-            <input type="text" id="description" name="description" required>
+            <textarea rows="5" cols="60" id="description" name="description" required/></textarea>
             <label for="image">Imagen:</label>
             <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" required>
             <label for="category">Category:</label>
@@ -28,8 +28,12 @@ function createProductForm() {
 
 function showProducts(products) {
     console.log("Displaying products");
-    return template(products.map(product => 
-    productTemplate(product)).join(''));
+    return template(`
+        <div class="product-list">`+
+        products.map(product => 
+    productTemplate(product)).join('')+
+        `</div>`)
+    ;
 }
 
 function createProduct(product) {
@@ -40,8 +44,10 @@ function createProduct(product) {
 
 function adminShowProducts(products) {
     console.log("Displaying admin products");
-    return template(products.map(product => 
-    adminProductTemplate(product)).join(''),true);
+    return template(`
+        <div class="product-list">`+products.map(product => 
+    adminProductTemplate(product)).join('')+
+        `</div>`,true);
 }
 
 function adminEditProduct(product){

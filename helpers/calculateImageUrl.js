@@ -6,7 +6,7 @@ function calculateImageUrl(image){
     } else {
         console.error("Image URL does not contain 'upload':", image);
     }
-    console.log("Calculated image URL:", url);
+    //console.log("Calculated image URL:", url);
     return url;
 }
 

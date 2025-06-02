@@ -88,8 +88,8 @@ router.get("/new", (req, res) => {
 
 */
 router.post("/create", upload.single("image") , async (req, res) => {
-    console.log("Received request", req.body);
-    console.log("Received file:", req.file);
+    //console.log("Received request", req.body);
+    //console.log("Received file:", req.file);
     try {
         //console.log("Received product data:", req.body);
         const _product = {
