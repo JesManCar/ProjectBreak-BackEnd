@@ -78,15 +78,7 @@ router.put("/edit/:id", async (req, res) => {
 router.get("/new", (req, res) => {
     res.status(200).send(createProductForm());
 });
-/*
-   "name": "Camiseta de Luffy 3",
-    "description": "Camiseta con el personaje de Luffy de la serie de One Piece",
-    "image": "To Be Added",
-    "category": "Camisetas",
-    "size": "L",
-    "price": 1
 
-*/
 router.post("/create", upload.single("image") , async (req, res) => {
     //console.log("Received request", req.body);
     //console.log("Received file:", req.file);

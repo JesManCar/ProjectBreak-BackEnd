@@ -7,4 +7,13 @@ function authMiddleware(req, res, next) {
     next();
 }
 
-module.exports = authMiddleware;
+function authApiMiddleware(req, res, next) {
+const key = req.headers['x-api-key'];
+  if (key === process.env.API_KEY) {
+    next();
+  } else {
+    res.status(403).json({ message: 'No autorizado' });
+  }
+}
+
+module.exports = {authMiddleware, authApiMiddleware};

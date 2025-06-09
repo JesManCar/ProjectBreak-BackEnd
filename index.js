@@ -8,7 +8,9 @@ const { dbConnection } = require('./config/config.js');
 const routes = require('./routes/productRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const authRoutes= require('./routes/authRoutes.js');
-const authMiddleware = require('./middlewares/authMiddleware.js');
+const apiRoutes = require('./routes/apiRoutes.js');
+const {authMiddleware, authApiMiddleware} = require('./middlewares/authMiddleware.js');
+const { api } = require('./config/cloudinary.js');
 
 
 app.use(express.urlencoded({extended: true}));
@@ -23,6 +25,9 @@ app.use(session({
 
 // User Routes
 app.use('/', routes);
+
+// API Routes
+app.use('/api', authApiMiddleware, apiRoutes);
 
 // Login Routes
 app.use('/login', authRoutes);
