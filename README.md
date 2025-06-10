@@ -1,12 +1,13 @@
 <h1 align="center"> Project Break BackEnd (API) </h1>
 
-![Badge In Deployment](https://img.shields.io/badge/STATUS-IN%20DEPLOYMENT%2075%-green)
+![Badge In Deployment](https://img.shields.io/badge/STATUS-IN%20DEPLOYMENT%20-green)
 
 ## 📝 Table of Contents
 
 - [About](#about)
 - [Dependencies](#️dependencies)
 - [Deployment](#deployment)
+- [Project Structure](#structure)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [Env Variables](#env_variables)
@@ -60,7 +61,7 @@ Finally we could up our service with:
 npm start
 ```
 
-##📁 Project Structure (click to expand)
+## 📁 Project Structure <a name = "structure"></a>
 ```
 ProjectBreak-BackEnd/
 │
@@ -111,5 +112,5 @@ ProjectBreak-BackEnd/
 
 <h4 align="center">
 
-![En Construccion](https://img.shields.io/badge/🚧%20Under%20Construction-20B2AA?style=for-the-badge)
+![](https://img.shields.io/badge/🚧%20Under%20Construction-20B2AA?style=for-the-badge)
 </p>

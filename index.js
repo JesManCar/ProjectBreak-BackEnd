@@ -11,7 +11,8 @@ const authRoutes= require('./routes/authRoutes.js');
 const apiRoutes = require('./routes/apiRoutes.js');
 const {authMiddleware, authApiMiddleware} = require('./middlewares/authMiddleware.js');
 const { api } = require('./config/cloudinary.js');
-
+const swaggerUI = require('swagger-ui-express');
+const docs = require('./docs/index.js');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -22,6 +23,8 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
+// Docs Routes
+app.use("/api-docs", swaggerUI.serve,swaggerUI.setup(docs));
 
 // User Routes
 app.use('/', routes);
