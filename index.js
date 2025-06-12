@@ -9,7 +9,7 @@ const routes = require('./routes/productRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const authRoutes= require('./routes/authRoutes.js');
 const apiRoutes = require('./routes/apiRoutes.js');
-const {authMiddleware, authApiMiddleware} = require('./middlewares/authMiddleware.js');
+const {authMiddleware} = require('./middlewares/authMiddleware.js');
 const { api } = require('./config/cloudinary.js');
 const swaggerUI = require('swagger-ui-express');
 const docs = require('./docs/index.js');
@@ -30,7 +30,7 @@ app.use("/api-docs", swaggerUI.serve,swaggerUI.setup(docs));
 app.use('/', routes);
 
 // API Routes
-app.use('/api', authApiMiddleware, apiRoutes);
+app.use('/api', apiRoutes);
 
 // Login Routes
 app.use('/login', authRoutes);
