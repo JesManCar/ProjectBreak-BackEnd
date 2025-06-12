@@ -4,6 +4,7 @@ const router = express.Router();
 const Product = require("../models/Product.js"); 
 const uploadMiddleware  = require('../middlewares/uploadCloudinaryMiddleware.js');
 const upload = uploadMiddleware("imgs");
+const {authApiMiddleware} = require('../middlewares/authMiddleware.js');
 
 router.get("/products", async (req, res) => {
     try {
@@ -48,12 +49,15 @@ router.get("/", (req, res) => {
     res.status(200).redirect("/api/products");
 });
 
-router.post("/create", upload.single("image") , async (req, res) => {
+router.post("/create", authApiMiddleware, upload.single("image") , async (req, res) => {
+    console.log("Creating product with data:");
     try {
+        console.log(req.body)
+        const _image = req.file ? req.file.path : "undefined";
         const _product = {
             name: req.body.name,
             description: req.body.description,
-            image: req.file.path,
+            image: _image,
             category: req.body.category,
             size: req.body.size,
             price: req.body.price
@@ -68,9 +72,18 @@ router.post("/create", upload.single("image") , async (req, res) => {
     }
 });
 
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", authApiMiddleware,upload.single("image"),  async (req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+        const _image = req.file ? req.file.path : undefined;
+        const _product = {
+            name: req.body.name,
+            description: req.body.description,
+            image: _image,
+            category: req.body.category,
+            size: req.body.size,
+            price: req.body.price
+        }
+        const product = await Product.findByIdAndUpdate(req.params.id, _product);
         if (!product) {
             return res.status(404).send({ message: "Product not found" });
         }
