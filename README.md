@@ -9,12 +9,16 @@
 - [Deployment](#deployment)
 - [Project Structure](#structure)
 - [Usage](#usage)
-- [Built Using](#built_using)
+- [Documentation](#documentation)
+- [Testing](#testing)
 - [Env Variables](#env_variables)
+- [Built Using](#built_using)
 
 ## 🧐 About <a name = "about"></a>
 
-This is the second "big" Project in the bootcamp of __"The Bridge"__,  in this case we programming an API REST using __Express__ for the server, __Moongose__ for the databases and __Cloudinary with Multer__ for uploading images automatically.
+Project Break - BackEnd is a REST API developed as part of the second major project at the full-stack bootcamp by The Bridge.
+
+Its purpose is to simulate a real-world backend for an e-commerce platform, where products are managed, categorized, displayed, and updated both via API and visual admin interfaces. It focuses on clean architecture, security, and API usability.
 
 ## ⚒️ Dependencies <a name = "dependiencies"></a>
 
@@ -42,19 +46,7 @@ Install dependencies:
 npm i
 ```
 Create and configure an ```.env``` file for environment variables
-```
-MONGO_URI = To connect with the database in MongoDB
-PORT = Setup a port (8080 usually)
-ADMIN_NAME = Setup your Admin Name for Login in Visual side
-ADMIN_PASSWORD = Setup your Admin Password for Login in Visual side
-API_KEY = Setup your Admin Key for Login in API (JSON) side
-```
-Add Cloudinary credentials to ```.env```
-```
-CLOUDINARY_NAME = Your name of Cloudinary
-CLOUDINARY_KEY = Your key of Cloudinary
-CLOUDINARY_SECRET = Your secret of Cloudinary
-```
+- [Env Variables](#env_variables)
 
 Finally we could up our service with:
 ```
@@ -63,54 +55,160 @@ npm start
 
 ## 📁 Project Structure <a name = "structure"></a>
 ```
-ProjectBreak-BackEnd/
+📦 ProjectBreak-BackEnd/
+├── 🛠️ config/                     # Configuration files
+│   ├── ☁️ cloudinary.js
+│   └── ⚙️ config.js
 │
-├── config/                             # Configuration for services
-│ ├── cloudinary.js
-│ └── config.js 
+├── 🎮 controllers/                # Route logic
+│   ├── 🔐 authController.js
+│   └── 📦 productController.js
 │
-├── controllers/                        # Route logic controllers
-│ ├── authController.js 
-│ └── productController.js 
+├── 🧰 helpers/                    # Utility functions
+│   ├── 🧮 calculateImageUrl.js
+│   ├── 🧾 productTemplate.js
+│   └── 🧱 template.js
 │
-├── helpers/                            # Utility and helper functions
-│ ├── calculateImageUrl.js 
-│ ├── productTemplate.js 
-│ └── template.js 
+├── 🖼️ imgs/                      # Sample images
+│   ├── 👕 camiseta-1.png
+│   ├── 👖 pantalon-1.webp
+│   └── 👟 zapato-1.avif
 │
-├── imgs/                               # Example or static images
-│ ├── camiseta-1.png
-│ ├── pantalon-1.webp
-│ └── zapato-1.avif
+├── 🧪 middlewares/               # Express middlewares
+│   ├── 🔐 authMiddleware.js
+│   └── ☁️ uploadCloudinaryMiddleware.js
 │
-├── middlewares/                        # Custom Express middlewares
-│ ├── authMiddleware.js 
-│ └── uploadCloudinaryMiddleware.js 
+├── 🧬 models/                    # Mongoose models
+│   └── 📦 Product.js
 │
-├── models/ # Mongoose data models
-│ └── Product.js 
+├── 🌐 routes/                    # Express route handlers
+│   ├── 🧑‍💼 adminRoutes.js
+│   ├── 🌍 apiRoutes.js
+│   ├── 🔐 authRoutes.js
+│   └── 📦 productRoutes.js
 │
-├── routes/                             # API route definitions
-│ ├── adminRoutes.js 
-│ ├── apiRoutes.js 
-│ ├── authRoutes.js 
-│ └── productRoutes.js 
+├── 📄 docs/                      # Swagger documentation setup
+│   ├── 🧾 basicInfo.js
+│   ├── 🧩 components.js
+│   ├── 🔚 endpoints.js
+│   ├── 📚 index.js
+│   └── 🧱 middlewares.js
 │
-├── test/ # Unit and integration tests
-│ └── productController.test.js
+├── 🧪 test/                      # Testing
+│   └── 🧪 productController.test.js
 │
-├── .env                                # Environment variables
-├── .gitignore                          # Git ignore rules
-├── index.js                            # App entry point
-├── LICENSE                             # Project license
-├── package.json                        # Project metadata and dependencies
-├── package-lock.json                   # Locked dependency versions
-└── README.md                           # Project documentation
+├── 📄 .env                       # Environment variables
+├── 🗑️ .gitignore                # Files to ignore by Git
+├── 🚀 index.js                  # App entry point
+├── 🪪 LICENSE                   # License file
+├── 📦 package.json              # Project metadata
+├── 🔒 package-lock.json         # Dependency lock file
+└── 📝 README.md                 # Project documentation
 ```
+
+## 📡 Endpoints
+
+### API Endroutes
+| Method | Route                     | Description                                 | Middleware               |
+|--------|---------------------------|---------------------------------------------|--------------------------|
+| GET    | /api/products             | Get all products (JSON)                     | -                        |
+| GET    | /api/products/:cat        | Get products by category (JSON)             | -                        |
+| GET    | /api/product/:id          | Get single product by ID (JSON)             | -                        |
+| POST   | /api/create               | Create product (JSON + image)               | authApiMiddleware        |
+| GET    | /api/edit/:id             | Edit product by ID (JSON + image)           | authApiMiddleware        |
+
+### Users Endroutes (With Frontend)
+| Method | Route                     | Description                                 | Middleware               |
+|--------|---------------------------|---------------------------------------------|--------------------------|
+| GET    | /products                 | Get all products (HTML)                     | -                        |
+| GET    | /products/:cat            | Get products by category (HTML)             | -                        |
+| GET    | /product/:id              | Get single product by ID (HTML)             | -                        |
+
+### Admin Endroutes (With Frontend)
+| Method | Route                     | Description                                 | Middleware               |
+|--------|---------------------------|---------------------------------------------|--------------------------|
+| GET    | /admin/products           | Admin view of all products                  | -                        |
+| GET    | /admin/products/:cat      | Admin view of products by category          | -                        |
+| GET    | /admin/product/:id        | Admin view of single product                | -                        |
+| GET    | /admin/product/edit/:id   | Admin product edit form                     | -                        |
+| PUT    | /admin/edit/:id           | Update product info                         | -                        |
+| GET    | /admin/new                | Admin create product form                   | -                        |
+| POST   | /admin/create             | Create product (form-data + image)          | uploadMiddleware         |
+| GET    | /admin/delete/:id         | View delete confirmation                    | -                        |
+| DELETE | /admin/delete/:id         | Delete product                              | -                        |
+
+### Login Endroutes (With Frontend)
+| Method | Route                     | Description                                 | Middleware               |
+|--------|---------------------------|---------------------------------------------|--------------------------|
+| GET    | /login                    | Login page (form)                           | -                        |
+| POST   | /login/auth               | Submit login credentials                    | -                        |
+| GET    | /login/out                | Logout and clear session                    | -                        |
+
 
 ## 🚀 Usage <a name = "usage"></a>
 
-<h4 align="center">
+Once the server is running, you can:
 
-![](https://img.shields.io/badge/🚧%20Under%20Construction-20B2AA?style=for-the-badge)
-</p>
+- Access the main API at: `http://localhost:8080/api` with Software like Postman.
+- Access with an explorer fronted at: `http://localhost:8080/` to see all the products. (Users View)
+- Access with an explorer fronted at: `http://localhost:8080/admin` to see all the products, create or edit them. (Admin View with Credentials)
+
+## 📚 Documentation <a name = "documentation"></a>
+
+This project includes auto-generated API documentation using **Swagger**. Once the server is up, visit:
+
+```
+http://localhost:8080/api/docs
+```
+
+It provides descriptions, parameters, responses, and testing capabilities for each endpoint.
+
+## 🧪 Testing <a name = "testing"></a>
+
+Tests are written using **Jest** and **Supertest** for controller and route validation.
+
+To run the tests:
+```bash
+npm test
+```
+
+These include unit tests for controller logic and integration tests for key endpoints.
+
+## 🌐 Built Using <a name = "built_using"></a>
+
+- Node.js
+- Express
+- MongoDB & Mongoose
+- Cloudinary & Multer
+- Swagger
+- Jest & Supertest
+
+
+## 🫣 .ENV (Env Variables) <a name = "env_variables"></a>
+
+&emsp;&emsp;⚠️ **Disclaimer:** All environment variables shown here are for educational and practice purposes only. This is a student project, and no real credentials or private keys are used. Including them in the README is safe and intentional to help reviewers or other students understand the project setup.
+
+To run this project, create a `.env` file at the root with the following variables:
+
+```
+# MongoDB connection string
+MONGO_URI="mongodb+srv://youruser:yourpassword@cluster0.awolzzv.mongodb.net/Shop_Products"
+
+# Server port
+PORT=8080
+
+# Admin login credentials (for frontend visual access)
+ADMIN_NAME=admin
+ADMIN_PASSWORD=admin1234
+
+# API Key (for api access to restricted endpoints)
+API_KEY=secret_api_key_here
+
+# Cloudinary credentials (for image upload functionality)
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+```
+#
+
+📌 Project made with ❤️ during the bootcamp at <strong>The Bridge</strong>.
