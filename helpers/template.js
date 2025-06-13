@@ -16,9 +16,9 @@ const head = `<!DOCTYPE html>
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                background-color:rgb(185, 185, 185);
+                background-color:rgb(235, 232, 232);
             }
-            h1 {
+            h1, h2{
                 text-align: center;
                 color: #333;
             }
@@ -33,12 +33,39 @@ const head = `<!DOCTYPE html>
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                background-color: rgb(219, 219, 219);
-                border: 1px solid black;
+                background-color: rgba(255, 255, 255, 0.82);
+                box-shadow: 0px 0px 5px 5px rgba(165, 165, 165, 0.22);
                 margin: 20px;
                 padding: 10px;
                 border-radius: 5px;
                 width: 20%;
+            }
+            .product h2 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                min-height: 50px;
+                max-height: 50px;
+                overflow: hidden;
+                margin-top: 10px;
+            }
+            .product img {
+                max-width: 100%;
+                height: auto;
+                max-height: 200px;
+                border-radius: 5px;
+            }
+            .button{
+                text-decoration: none;
+                color: white;
+                background-color: rgba(63, 210, 255, 0.89);
+                padding: 10px 15px;
+                border-radius: 5px;
+                margin-top: 10px;
+                width: 90%;
+                text-align: center;
+            }
+            .button:hover {
+                background-color: rgb(0, 184, 240);
             }
             .product-actions{
                 display: flex;
@@ -57,6 +84,22 @@ const head = `<!DOCTYPE html>
             }
             .product-actions a:hover {
                 background-color: #333;
+            }
+            table{
+                width: 90%;
+                margin: 20px;
+                border: 1px solid black;
+                align-self: center;
+                border-collapse: collapse;
+            }
+            table img{
+                max-width: 50px;
+                height: auto;
+            }
+            table th, table td {
+                border: 1px solid black;
+                padding: 10px;
+                text-align: center;
             }
             form{
                 display: flex;
@@ -119,7 +162,8 @@ const header = `
         </nav>
         </header>
 `
-const adminHeader = `<body>
+const adminHeader = `
+    <body>
     <header>
     <nav>
         <ul>
@@ -129,6 +173,7 @@ const adminHeader = `<body>
             <li><a href="/admin/products/Zapatos">Zapatos</a></li>
             <li><a href="/admin/products/Accesorios">Accesorios</a></li>
             <li><a href="/admin/new">Nuevo Producto</a></li>
+            <li><a href="/admin/list">Listar Productos</a></li>
             <li><a href="/login/out" style="color:red">LogOut</a></li>
             <li><h3 style="color:red">ADMIN</h3></li>
         </nav>

@@ -10,6 +10,7 @@ function productTemplate (product){
         <p>Size: ${product.size}</p>
         <p>Price: ${product.price}€</p>
         <img src="${calculateImageUrl(product.image)}" alt="${product.description}" />
+        <a class="button" href="/product/${product._id}">View</a>
     </div>
 `};
 
@@ -28,6 +29,24 @@ function adminProductTemplate (product){
         </div>
     </div>
 `}
+
+function adminProductTemplateList(product){
+
+    return `<tr class="product-list-item">
+        <td>${product.name}</td>
+        <td>${product.description}</td>
+        <td>${product.category}</td>
+        <td>${product.size}</td>
+        <td>${product.price}€</td>
+        <td><img src="${calculateImageUrl(product.image)}" alt="${product.description}" /></td>
+        <td>
+            <a class="button" href="/admin/product/${product._id}">View</a>
+            <a class="button" href="/admin/product/edit/${product._id}">Edit</a>
+            <a class="button" href="/admin/delete/${product._id}">Delete</a>
+        </td>
+        </tr>
+        `
+}
 
 function adminEditProductTemplate (product){
     return `<h1>Edit Product</h1>
@@ -52,4 +71,4 @@ function adminEditProductTemplate (product){
 }
 
 
-module.exports = { productTemplate, adminProductTemplate, adminEditProductTemplate};
+module.exports = { productTemplate, adminProductTemplate, adminEditProductTemplate, adminProductTemplateList};

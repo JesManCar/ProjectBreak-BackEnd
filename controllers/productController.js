@@ -1,6 +1,6 @@
 //productController.js
 const { template } = require('../helpers/template.js');
-const { productTemplate, adminProductTemplate, adminEditProductTemplate } = require('../helpers/productTemplate.js');
+const { productTemplate, adminProductTemplate, adminEditProductTemplate, adminProductTemplateList } = require('../helpers/productTemplate.js');
 const { validSizes, validCategories } = require('../models/Product.js');
 
 function createProductForm() {
@@ -26,13 +26,12 @@ function createProductForm() {
     return template(form,true);
 }
 
-function showProducts(products) {
+function showProducts(products, category) {
     console.log("Displaying products");
     return template(`
+        <h2>${category || ""}</h2>
         <div class="product-list">`+
-        products.map(product => 
-    productTemplate(product)).join('')+
-        `</div>`)
+        products.map(product => productTemplate(product)).join('')+`</div>`)
     ;
 }
 
@@ -42,9 +41,10 @@ function createProduct(product) {
     return template(productTemplate(product),true);
 }
 
-function adminShowProducts(products) {
+function adminShowProducts(products, category) {
     console.log("Displaying admin products");
     return template(`
+        <h2>${category || ""}</h2>
         <div class="product-list">`+products.map(product => 
     adminProductTemplate(product)).join('')+
         `</div>`,true);
@@ -66,11 +66,21 @@ function adminDeleteProduct(product) {
         `, true);
 }
 
+function adminListProducts(products, category) {
+    console.log("Listing admin products");
+    return template(`
+        <h2>${category || ""}</h2>
+        <table class="product-list-list">`+
+        products.map(product => adminProductTemplateList(product)).join('')+`</div>`,true)
+        + ` </table>`;
+}
+
 module.exports = {
     createProduct,
     showProducts,
     createProductForm,
     adminShowProducts,
     adminEditProduct,
-    adminDeleteProduct
+    adminDeleteProduct,
+    adminListProducts
 };

@@ -7,7 +7,7 @@ const { showProducts } = require("../controllers/productController.js");
 router.get("/products", async (req, res) => {
     try {
         const products = await Product.find();
-        res.status(200).send(showProducts(products));
+        res.status(200).send(showProducts(products, "Productos"));
     } catch (error) {
         console.error(error);
         res
@@ -18,7 +18,7 @@ router.get("/products", async (req, res) => {
 router.get("/products/:cat", async (req, res) => {
     try {
         const products = await Product.find({ category: req.params.cat });
-        res.status(200).send(showProducts(products));
+        res.status(200).send(showProducts(products, req.params.cat));
 
     } catch (error) {
         console.error(error);

@@ -5,12 +5,27 @@ const Product = require("../models/Product.js");
 const uploadMiddleware  = require('../middlewares/uploadCloudinaryMiddleware.js');
 const upload = uploadMiddleware("imgs");
 
-const { createProduct, createProductForm, adminShowProducts, adminEditProduct, adminDeleteProduct } = require("../controllers/productController.js");
+const { createProduct, createProductForm, adminShowProducts, adminEditProduct, adminDeleteProduct, adminListProducts} = require("../controllers/productController.js");
 
 router.get("/products", async (req, res) => {
     try {
         const products = await Product.find();
-        res.status(200).send(adminShowProducts(products));
+        res.status(200).send(adminShowProducts(products, "Productos"));
+    } catch (error) {
+        console.error(error);
+        res
+            .status(500)
+            .send({ message: "There was a problem trying to get the products" });
+    }
+});
+
+router.get("/", (req, res) => {
+    res.status(200).redirect("/admin/products");
+});
+router.get("/list", async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.status(200).send(adminListProducts(products, "Productos"));
     } catch (error) {
         console.error(error);
         res
@@ -22,7 +37,7 @@ router.get("/products", async (req, res) => {
 router.get("/products/:cat", async (req, res) => {
     try {
         const products = await Product.find({ category: req.params.cat });
-        res.status(200).send(adminShowProducts(products));
+        res.status(200).send(adminShowProducts(products, req.params.cat));
 
     } catch (error) {
         console.error(error);
