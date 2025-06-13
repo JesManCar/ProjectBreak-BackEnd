@@ -127,15 +127,15 @@ npm start
 ### Admin Endroutes (With Frontend)
 | Method | Route                     | Description                                 | Middleware               |
 |--------|---------------------------|---------------------------------------------|--------------------------|
-| GET    | /admin/products           | Admin view of all products                  | -                        |
-| GET    | /admin/products/:cat      | Admin view of products by category          | -                        |
-| GET    | /admin/product/:id        | Admin view of single product                | -                        |
-| GET    | /admin/product/edit/:id   | Admin product edit form                     | -                        |
-| PUT    | /admin/edit/:id           | Update product info                         | -                        |
-| GET    | /admin/new                | Admin create product form                   | -                        |
-| POST   | /admin/create             | Create product (form-data + image)          | uploadMiddleware         |
-| GET    | /admin/delete/:id         | View delete confirmation                    | -                        |
-| DELETE | /admin/delete/:id         | Delete product                              | -                        |
+| GET    | /admin/products           | Admin view of all products                  | authMiddleware|
+| GET    | /admin/products/:cat      | Admin view of products by category          |  authMiddleware                      |
+| GET    | /admin/product/:id        | Admin view of single product                | authMiddleware                        |
+| GET    | /admin/product/edit/:id   | Admin product edit form                     | authMiddleware                       |
+| PUT    | /admin/edit/:id           | Update product info                         | authMiddleware                        |
+| GET    | /admin/new                | Admin create product form                   | authMiddleware                        |
+| POST   | /admin/create             | Create product (form-data + image)          | uploadMiddleware, authMiddleware         |
+| GET    | /admin/delete/:id         | View delete confirmation                    | authMiddleware                        |
+| DELETE | /admin/delete/:id         | Delete product                              | authMiddleware                        |
 
 ### Login Endroutes (With Frontend)
 | Method | Route                     | Description                                 | Middleware               |
