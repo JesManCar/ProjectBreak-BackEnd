@@ -77,7 +77,7 @@ router.get("/product/edit/:id", async (req, res) => {
 });
 router.put("/edit/:id", upload.single("image"), async (req, res) => {
     try {
-                const _product = {
+        const _product = {
             name: req.body.name,
             description: req.body.description,
             image: req.file.path,

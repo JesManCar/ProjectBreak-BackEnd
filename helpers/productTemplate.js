@@ -50,7 +50,7 @@ function adminProductTemplateList(product){
 
 function adminEditProductTemplate (product){
     return `<h1>Edit Product</h1>
-        <form action="/admin/edit/${product._id}?_method=PUT" method="POST">
+        <form action="/admin/edit/${product._id}?_method=PUT" method="POST" enctype="multipart/form-data">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="${product.name}" required>
             <label for="description">Description:</label>
