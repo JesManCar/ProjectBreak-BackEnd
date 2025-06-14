@@ -1,7 +1,7 @@
 //Product.js
 const mongoose = require('mongoose');
 
-const validSizes = ["XS","S", "M", "L", "XL", "XL"];
+const validSizes = ["XS","S", "M", "L", "XL", "XXL"];
 const validCategories = ["Camisetas", "Pantalones","Zapatos", "Accesorios"];
 
 const ProductSchema = new mongoose.Schema({

@@ -75,9 +75,17 @@ router.get("/product/edit/:id", async (req, res) => {
             .send({ message: "There was a problem trying to get the product" });
     }
 });
-router.put("/edit/:id", async (req, res) => {
+router.put("/edit/:id", upload.single("image"), async (req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+                const _product = {
+            name: req.body.name,
+            description: req.body.description,
+            image: req.file.path,
+            category: req.body.category,
+            size: req.body.size,
+            price: req.body.price
+        }
+        const product = await Product.findByIdAndUpdate(req.params.id, _product);
         if (!product) {
             return res.status(404).send({ message: "Product not found" });
         }
